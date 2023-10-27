@@ -62,10 +62,43 @@ int editartarefa(listadetarefas *lt){
     printf("Digite o número da Tarefa que deseja editar (de 1 a %d): ", lt->qtd);
     scanf("%d", &posicao);
 
-    if (posicao <=1 && posicao <= lt->qtd){
-        
-    }
+    if (posicao >=1 && posicao <= lt->qtd){
+        int campo;
 
+        printf("1. Prioridade\n");
+        printf("2. Categoria\n");
+        printf("3. Descrição\n");
+        printf("4. Estado\n");
+
+        printf("Digite o campo da tarefa que voce deseja modificar:");
+        scanf("%d", &campo);
+
+        if(campo == 1){
+            printf("Nova Prioridade (0 a 10):\n");
+            printf("");
+            scanf("%d", &lt->tarefas[posicao].prioridade);
+            printf("Tarefa editada!");
+        } else if(campo == 2){
+            printf("Nova Categoria:\n");
+            printf("");
+            scanf("%[^\n]", lt->tarefas[posicao].categoria);
+            printf("Tarefa editada!");
+        } else if(campo == 3){
+            printf("Nova Descrição:\n");
+            printf("");
+            scanf("%[^\n]", lt->tarefas[posicao].descricao);
+            printf("Tarefa editada!");
+        } else if(campo == 4){
+            printf("Novo Estado:\n");
+            printf("");
+            scanf("%[^\n]", lt->tarefas[posicao].estado);
+            printf("Tarefa editada!");
+        } else{
+            printf("Campo não existente!\n");
+        }
+    } else{
+        printf("Essa tarefa não existe!\n");
+    }
 }
 
 
