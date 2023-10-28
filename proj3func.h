@@ -11,11 +11,14 @@ typedef struct {
     int qtd;
 } listadetarefas;
 
-//Chamando as funções já explicadas em "biblioteca.c"
+//Chamando as funções já explicadas em "proj3func.c"
+void clearbuffer();
 int criartarefa(listadetarefas *lt);
 int deletartarefa(listadetarefas *lt);
 int listartarefa(listadetarefas lt);
 int editartarefa(listadetarefas *lt);
+int filtrarprioridade(listadetarefas *lt);
+//int filtrarestado(listadetarefas *lt);
 
 int salvarlista(listadetarefas *lt, char nome[]);
 int carregarlista(listadetarefas *lt, char nome[]);
