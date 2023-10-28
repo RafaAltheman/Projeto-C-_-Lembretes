@@ -197,6 +197,38 @@ int filtrarcategoria(listadetarefas *lt){
     }
     }
 
+int filtrarprioridadeecategoria(listadetarefas *lt){
+    int prioridadeescolhida;
+    char categoriaescolhida[100];
+    int encontrado = 0;
+
+    printf("Digite o número da prioridade que voce deseja filtrar: ");
+    scanf("%d", &prioridadeescolhida);
+
+    printf("Digite a categoria que você deseja filtrar: ");
+    scanf(" %[^\n]", categoriaescolhida);
+
+    if(prioridadeescolhida >=0 && prioridadeescolhida<=10){
+        for(int i = 0; i < lt->qtd; i++){
+            if (lt->tarefas[i].prioridade == prioridadeescolhida && strcmp(categoriaescolhida, lt->tarefas[i].categoria) == 0){
+                printf("Tarefas com a categoria e prioridade selecionada:\n");
+                printf("Prioridade: %d\n", lt->tarefas[i].prioridade);
+                printf("Categoria: %s\n", lt->tarefas[i].categoria);
+                printf("Descricao: %s\n", lt->tarefas[i].descricao);
+                printf("Estado da Tarefa: %s\n", lt->tarefas[i].estado);
+                printf("\n");
+                encontrado = 1;
+            }
+        }
+    } else if (!encontrado){
+        printf("Nenhuma tarefa encontrada com essa categoria.\n");
+    }
+    }
+
+
+    
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
