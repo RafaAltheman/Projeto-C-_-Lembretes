@@ -111,7 +111,7 @@ int editartarefa(listadetarefas *lt){
 
 int filtrarprioridade(listadetarefas *lt){
     int prioridadeescolhida;
-    printf("Digite o número da prioridade que voce deseja filtrar: ", lt->qtd);
+    printf("Digite o número da prioridade que voce deseja filtrar: ");
     scanf("%d", &prioridadeescolhida);
 
     if (prioridadeescolhida >=0 && prioridadeescolhida<=10){
@@ -154,6 +154,49 @@ int filtrarestado(listadetarefas *lt){
         printf("Digite um estado válido\n");
     }
 }
+
+int filtrarcategoria(listadetarefas *lt){
+    char categoriaescolhida[100];
+    int encontrado = 0;
+    tarefa tarefasprioritarias[100];
+
+    printf("Digite a categoria que você deseja filtrar: ");
+    scanf(" %[^\n]", categoriaescolhida);
+
+    int tarefasprioridade = 0;
+
+    for (int i = 0; i < lt->qtd; i++) {
+        if (strcmp(categoriaescolhida, lt->tarefas[i].categoria) == 0) {
+            tarefasprioritarias[tarefasprioridade] = lt->tarefas[i];
+            tarefasprioridade++;
+            encontrado = 1;
+        }
+    }
+    if (!encontrado){
+        printf("Digite uma categoria válida\n");
+    } else {
+        for(int i = 0; i < tarefasprioridade; i++){
+            for(int y = i+1; y < tarefasprioridade; y++){
+                if(tarefasprioritarias[i].prioridade < tarefasprioritarias[y].prioridade){
+                    tarefa ordem = tarefasprioritarias[i];
+                    tarefasprioritarias[i] = tarefasprioritarias[y];
+                    tarefasprioritarias[y] = ordem;
+                }
+            }
+        }
+   
+    }  
+        printf("Tarefas com categoria escolhida e ordenadas por prioridade:\n");
+        for (int i = 0; i < tarefasprioridade; i++) {
+            printf("Tarefa %d:\n", i + 1);
+            printf("Prioridade: %d\n", tarefasprioritarias[i].prioridade);
+            printf("Categoria: %s\n", tarefasprioritarias[i].categoria);
+            printf("Descricao: %s\n", tarefasprioritarias[i].descricao);
+            printf("Estado da Tarefa: %s\n", tarefasprioritarias[i].estado);
+            printf("\n");
+    }
+    }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -26,9 +26,10 @@ int main() {
         printf("4. Editar \n");
         printf("5. Filtrar por prioridade \n");
         printf("6. Filtrar por estado \n");
-        printf("7. Sair \n");
+        printf("7. Filtrar por Categoria \n");
+        printf("8. Sair \n");
 
-        printf("Escolha uma opcao (1 a 7): ");
+        printf("Escolha uma opcao (1 a 8): ");
         scanf("%d", &opcao); //Usuário digita a opção dele e ela é salva na mamória.
 
         // Dependendo da escolha do usuário, a função roda para realizar o cadastro, listagem ou deletar o lembrete
@@ -45,7 +46,9 @@ int main() {
             filtrarprioridade(&lt);
         } else if (opcao == 6){
             filtrarestado(&lt);
-        } else if (opcao == 7){ //Para o usuário salvar o arquivo, ele deve apertar a opção 4 ("Sair"), sendo que quando acessar o programa novamente, todas as informações fornecidas antes de sair serão listadas
+        } else if (opcao == 7){
+            filtrarcategoria(&lt);
+        } else if (opcao == 8){ //Para o usuário salvar o arquivo, ele deve apertar a opção ("Sair"), sendo que quando acessar o programa novamente, todas as informações fornecidas antes de sair serão listadas
             salvarlista(&lt, "arquivo.txt");
             break;
         } else{
