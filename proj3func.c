@@ -225,7 +225,25 @@ int filtrarprioridadeecategoria(listadetarefas *lt){
     }
     }
 
+int exportarprioridade(listadetarefas *lt, char nome[30]){
+    int prioridadeescolhida;
+    printf("Digite o número da prioridade que voce deseja filtrar: ");
+    scanf("%d", &prioridadeescolhida);
 
+    FILE *f = fopen("tarefasporprioridade.txt", "w");
+
+    if (f == NULL){  //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
+      printf("Erro ao abrir o arquivo. \n"); 
+      return 1;
+   }
+   for (int i = 0; i < lt -> qtd; i++){
+        if(lt->tarefas[i].prioridade == prioridadeescolhida){
+            fprintf(f, "Prioridade: %d, Categoria: %s, Estado: %s, Descrição: %s\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
+        }
+   }
+    fclose(f);
+    printf("Tarefas com prioridade selecionada foram exportadas\n");
+}
     
 
 
@@ -254,4 +272,17 @@ int carregarlista(listadetarefas *lt, char nome[]){ //Função para carregar a l
     fread(lt, sizeof(listadetarefas), 1, f); //Este comando le o arquivo binário
     fclose(f); //Fecha o arquivo
     return 0;
+}
+
+int ler_exportarprioridade(listadetarefas *lt, char nome[30]){
+    FILE *f = fopen(nome, "rb"); //abre o arquivo e lê ele em formato binário
+    if (f == NULL) { //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
+        printf("Arquivo nao encontrado.\n"); 
+        return 1;
+    }
+    fread(lt, sizeof(listadetarefas), 1, f); //escreve as informações do cliente no arquivo
+    fclose(f); //fecha o arquivo
+    return 0;
+
+    printf("Tarefas coma prioridade escolhida foram exportadas com sucesso!");
 }

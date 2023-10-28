@@ -5,6 +5,7 @@
 
 int main() {
 
+    
     carregarlista(listartarefa, "arquivo.txt"); //Esta função carrega a lista de tarefas, abrindo o arquivo
     //Declarando variáveis
     int cod;
@@ -17,6 +18,8 @@ int main() {
 
     int opcao;
 
+    ler_exportarprioridade(&lt, "tarefasproprioridade.txt");
+    
     // Declaramos um while para o usuário decidir qual função ele quer no momento.
     while (1){
         printf("Opcoes de escolha:\n");
@@ -28,9 +31,10 @@ int main() {
         printf("6. Filtrar por estado \n");
         printf("7. Filtrar por Categoria \n");
         printf("8. Filtrar por prioridade e Categoria \n");
-        printf("9. Sair \n");
+        printf("9. Exportar tarefas por prioridade \n");
+        printf("10. Sair \n");
 
-        printf("Escolha uma opcao (1 a 9): ");
+        printf("Escolha uma opcao (1 a 10): ");
         scanf("%d", &opcao); //Usuário digita a opção dele e ela é salva na mamória.
 
         // Dependendo da escolha do usuário, a função roda para realizar o cadastro, listagem ou deletar o lembrete
@@ -51,7 +55,9 @@ int main() {
             filtrarcategoria(&lt);
         } else if (opcao == 8){
             filtrarprioridadeecategoria(&lt);
-        } else if (opcao == 9){ //Para o usuário salvar o arquivo, ele deve apertar a opção ("Sair"), sendo que quando acessar o programa novamente, todas as informações fornecidas antes de sair serão listadas
+        }else if (opcao == 9){
+            exportarprioridade(&lt, "tarefasporprioridade.txt");
+        }else if (opcao == 10){ //Para o usuário salvar o arquivo, ele deve apertar a opção ("Sair"), sendo que quando acessar o programa novamente, todas as informações fornecidas antes de sair serão listadas
             salvarlista(&lt, "arquivo.txt");
             break;
         } else{
