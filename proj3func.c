@@ -15,7 +15,7 @@ int criartarefa(listadetarefas *lt){
         scanf(" %[^\n]", lt->tarefas[lt->qtd].categoria); // Usamos " %[^\n]" para ler o "scanf" com espaços, guardando o que o usuário informar como prioridade na memória..
         printf("Descricao: ");
         scanf(" %[^\n]", lt->tarefas[lt->qtd].descricao); // Usamos " %[^\n]" para ler o "scanf" com espaços, guardando o que o usuário informar como prioridade na memória.
-        printf("Estado da tarefa: ");
+        printf("Estado da tarefa: (nao iniciado, em andamento ou completo) ");
         scanf(" %[^\n]", lt->tarefas[lt->qtd].estado);
         lt->qtd++; //A quantidade de tarefas aumenta quando o usuário terminar de descrever sua tarefa.
         printf("Tarefa cadastrada!\n"); //Quando o usuário terminar de descrever a tarefa essa mensagem aparece.
@@ -128,10 +128,32 @@ int filtrarprioridade(listadetarefas *lt){
     }
 }
     else {
-        printf("Prioridade inválida!");
+        printf("Prioridade inválida!\n");
     }
 }
 
+int filtrarestado(listadetarefas *lt){
+    char estadoescolhido[30];
+    int encontrado = 0;
+
+    printf("Digite o estado que voce quer filtrar(nao iniciado, em andamento ou completo): ");
+    scanf(" %[^\n]", estadoescolhido);
+
+    for(int i = 0; i < lt->qtd; i++){
+        if(strcmp(estadoescolhido, lt->tarefas[i].estado) == 0){
+            printf("Tarefas com o estado selecionado:\n");
+            printf("Prioridade: %d\n", lt->tarefas[i].prioridade); //Imprime a prioridade, procurando a  informação a partir da posição da tarefa na lista.
+            printf("Categoria: %s\n", lt->tarefas[i].categoria); //Imprime a categoria, procurando a  informação a partir da posição da tarefa na lista.
+            printf("Descricao: %s\n", lt->tarefas[i].descricao); //Imprime a descrição, procurando a  informação a partir da posição da tarefa na lista.
+            printf("Estado da Tarefa: %s\n", lt->tarefas[i].estado); //Imprime o estado da tarefa, procurando a informação a partir da posição da tarefa na lista.
+            printf("\n"); //Imprime um espaço para organizar a listagem
+            encontrado = 1;
+        }
+    }    
+    if (!encontrado){
+        printf("Digite um estado válido\n");
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

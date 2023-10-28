@@ -18,7 +18,7 @@ int deletartarefa(listadetarefas *lt);
 int listartarefa(listadetarefas lt);
 int editartarefa(listadetarefas *lt);
 int filtrarprioridade(listadetarefas *lt);
-//int filtrarestado(listadetarefas *lt);
+int filtrarestado(listadetarefas *lt);
 
 int salvarlista(listadetarefas *lt, char nome[]);
 int carregarlista(listadetarefas *lt, char nome[]);
