@@ -111,7 +111,7 @@ int editartarefa(listadetarefas *lt){
 
 int filtrarprioridade(listadetarefas *lt){
     int prioridadeescolhida;
-    printf("Digite o número da prioridade que voce deseja filtrar: ");
+    printf("Digite o número da prioridade que voce deseja filtrar:\n");
     scanf("%d", &prioridadeescolhida);
 
     if (prioridadeescolhida >=0 && prioridadeescolhida<=10){
@@ -136,7 +136,7 @@ int filtrarestado(listadetarefas *lt){
     char estadoescolhido[30];
     int encontrado = 0;
 
-    printf("Digite o estado que voce quer filtrar(nao iniciado, em andamento ou completo): ");
+    printf("Digite o estado que voce quer filtrar(nao iniciado, em andamento ou completo):\n");
     scanf(" %[^\n]", estadoescolhido);
 
     for(int i = 0; i < lt->qtd; i++){
@@ -160,7 +160,7 @@ int filtrarcategoria(listadetarefas *lt){
     int encontrado = 0;
     tarefa tarefasprioritarias[100];
 
-    printf("Digite a categoria que você deseja filtrar: ");
+    printf("Digite a categoria que você deseja filtrar:\n");
     scanf(" %[^\n]", categoriaescolhida);
 
     int tarefasprioridade = 0;
@@ -172,6 +172,7 @@ int filtrarcategoria(listadetarefas *lt){
             encontrado = 1;
         }
     }
+
     if (!encontrado){
         printf("Digite uma categoria válida\n");
     } else {
@@ -184,8 +185,8 @@ int filtrarcategoria(listadetarefas *lt){
                 }
             }
         }
-   
     }  
+
         printf("Tarefas com categoria escolhida e ordenadas por prioridade:\n");
         for (int i = 0; i < tarefasprioridade; i++) {
             printf("Tarefa %d:\n", i + 1);
@@ -202,10 +203,10 @@ int filtrarprioridadeecategoria(listadetarefas *lt){
     char categoriaescolhida[100];
     int encontrado = 0;
 
-    printf("Digite o número da prioridade que voce deseja filtrar: ");
+    printf("Digite o número da prioridade que voce deseja filtrar:\n");
     scanf("%d", &prioridadeescolhida);
 
-    printf("Digite a categoria que você deseja filtrar: ");
+    printf("Digite a categoria que você deseja filtrar:\n");
     scanf(" %[^\n]", categoriaescolhida);
 
     if(prioridadeescolhida >=0 && prioridadeescolhida<=10){
@@ -227,7 +228,7 @@ int filtrarprioridadeecategoria(listadetarefas *lt){
 
 int exportarprioridade(listadetarefas *lt, char nome[30]){
     int prioridadeescolhida;
-    printf("Digite o número da prioridade que voce deseja filtrar: ");
+    printf("Digite o número da prioridade que voce deseja exportar:\n");
     scanf("%d", &prioridadeescolhida);
 
     FILE *f = fopen("tarefasporprioridade.txt", "w");
@@ -242,10 +243,51 @@ int exportarprioridade(listadetarefas *lt, char nome[30]){
         }
    }
     fclose(f);
-    printf("Tarefas com prioridade selecionada foram exportadas\n");
+    printf("Tarefas com a prioridade selecionada foram exportadas\n");
 }
     
+int exportarcategoria(listadetarefas *lt, char nome[30]){
+    char categoriaselecionada[100];
 
+    printf("Digite a categoria que você deseja exportar:\n");
+    scanf("%d", &categoriaselecionada);
+
+    FILE *f = fopen("tarefasporcategoria.txt", "w");
+    if (f == NULL){  //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
+      printf("Erro ao abrir o arquivo. \n"); 
+      return 1;
+   } for (int i = 0; i < lt -> qtd; i++){
+        if(lt->tarefas[i].categoria == categoriaselecionada){
+            fprintf(f, "Prioridade: %d, Categoria: %s, Estado: %s, Descrição: %s\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
+        }
+   }
+    fclose(f);
+    printf("Tarefas com a categoria selecionada foram exportadas\n");
+
+}
+
+int exportarprioridadeecateforia(listadetarefas *lt, char nome[30]){
+    int prioridadeescolhida;
+    char categoriaescolhida[100];
+
+    printf("Digite o número da prioridade que voce deseja filtrar:\n");
+    scanf("%d", &prioridadeescolhida);
+
+    printf("Digite a categoria que você deseja filtrar:\n");
+    scanf(" %[^\n]", categoriaescolhida);
+
+    FILE *f = fopen("tarefasporprioridadeecategoria.txt", "w");
+    if (f == NULL){  //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
+      printf("Erro ao abrir o arquivo. \n"); 
+      return 1;
+   } for (int i = 0; i < lt -> qtd; i++){
+        if(lt->tarefas[i].categoria == categoriaescolhida){
+            fprintf(f, "Prioridade: %d, Categoria: %s, Estado: %s, Descrição: %s\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
+        }
+   }
+    fclose(f);
+    printf("Tarefas com a categoria e a prioridade selecionada foram exportadas\n");
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,5 +326,22 @@ int ler_exportarprioridade(listadetarefas *lt, char nome[30]){
     fclose(f); //fecha o arquivo
     return 0;
 
-    printf("Tarefas coma prioridade escolhida foram exportadas com sucesso!");
+    printf("Tarefas com a prioridade escolhida foram exportadas com sucesso!");
+}
+
+//int ler_exportarcategoria(listadetarefas *lt, char nome[30]){
+  //  FILE *f = fopen(nome, "rb"); //abre o arquivo e lê ele em formato binário
+  //  if (f == NULL) { //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
+  //      printf("Arquivo nao encontrado.\n"); 
+  //      return 1;
+  //  }
+   // fread(lt, sizeof(listadetarefas), 1, f); //escreve as informações do cliente no arquivo
+   // fclose(f); //fecha o arquivo
+   // return 0;
+
+   // printf("Tarefas com a categoria escolhida foram exportadas com sucesso!");
+//}
+
+int ler_exportarprioridadeecategoria(listadetarefas *lt, char nome[30]){
+    
 }
