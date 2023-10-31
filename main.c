@@ -4,12 +4,10 @@
 #include "proj3func.h"
 
 int main() {
-
-    
-    carregarlista(listartarefa, "arquivo.txt"); //Esta função carrega a lista de tarefas, abrindo o arquivo
+    //carregarlista(listartarefa, "arquivo.txt"); //Esta função carrega a lista de tarefas, abrindo o arquivo
     //Declarando variáveis
     int cod;
-    char arquivo[] = "tarefas";
+    char arquivo[] = "tarefas.bin";
     listadetarefas lt;
 
     cod = carregarlista(&lt, arquivo);
@@ -17,9 +15,6 @@ int main() {
         lt.qtd = 0;
 
     int opcao;
-
-    ler_exportarprioridade(&lt, "tarefasporprioridade.txt");
-    //ler_exportarcategoria(&lt, "tarefasporcategoria.txt");
 
     // Declaramos um while para o usuário decidir qual função ele quer no momento.
     while (1){
@@ -59,13 +54,13 @@ int main() {
         } else if (opcao == 8){
             filtrarprioridadeecategoria(&lt);
         } else if (opcao == 9){
-            exportarprioridade(&lt, "tarefasporprioridade.txt");
+            exportarprioridade(lt, "tarefasporprioridade.txt");
         } else if (opcao == 10){
             exportarcategoria(&lt, "tarefasporcategoria.txt");
         } else if (opcao == 11){
 
         } else if (opcao == 12){ //Para o usuário salvar o arquivo, ele deve apertar a opção ("Sair"), sendo que quando acessar o programa novamente, todas as informações fornecidas antes de sair serão listadas
-            salvarlista(&lt, "arquivo.txt");
+            salvarlista(&lt, "tarefas.bin");
             break;
         } else{
             printf("Erro! Escolha um numero valido! \n"); //Caso o usuário escolha um número fora do intervalo de 1 a 4, essa mensagem aparece na tela
@@ -75,5 +70,4 @@ int main() {
     cod = salvarlista(&lt,arquivo); //Salva as informações na lista
     if (cod !=0) //Se o "return" for diferente de zero, a tarefa não é cadastrada
         printf("Erro ao cadastrar as tarefas!");
-
 }
