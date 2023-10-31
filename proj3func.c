@@ -179,7 +179,7 @@ int filtrarcategoria(listadetarefas *lt){
         for(int i = 0; i < tarefasprioridade; i++){
             for(int y = i+1; y < tarefasprioridade; y++){
                 if(tarefasprioritarias[i].prioridade < tarefasprioritarias[y].prioridade){
-                    tarefa ordem = tarefasprioritarias[i];
+                    tarefa ordem = tarefasprioritarias[i]; 
                     tarefasprioritarias[i] = tarefasprioritarias[y];
                     tarefasprioritarias[y] = ordem;
                 }
@@ -226,7 +226,7 @@ int filtrarprioridadeecategoria(listadetarefas *lt){
     }
     }
 
-int exportarprioridade(listadetarefas *lt, char nome[30]){
+int exportarprioridade(listadetarefas lt, char nome[30]){
     int prioridadeescolhida;
     printf("Digite o número da prioridade que voce deseja exportar:\n");
     scanf("%d", &prioridadeescolhida);
@@ -237,9 +237,9 @@ int exportarprioridade(listadetarefas *lt, char nome[30]){
       printf("Erro ao abrir o arquivo. \n"); 
       return 1;
    }
-   for (int i = 0; i < lt -> qtd; i++){
-        if(lt->tarefas[i].prioridade == prioridadeescolhida){
-            fprintf(f, "Prioridade: %d, Categoria: %s, Estado: %s, Descrição: %s\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
+   for (int i = 0; i < lt.qtd; i++){
+        if(lt.tarefas[i].prioridade == prioridadeescolhida){
+            fprintf(f, "Prioridade: %d, Categoria: %s, Estado: %s, Descrição: %s\n", lt.tarefas[i].prioridade, lt.tarefas[i].categoria, lt.tarefas[i].estado, lt.tarefas[i].descricao);
         }
    }
     fclose(f);
@@ -266,7 +266,7 @@ int exportarcategoria(listadetarefas *lt, char nome[30]){
 
 }
 
-int exportarprioridadeecateforia(listadetarefas *lt, char nome[30]){
+int exportarprioridadeecategoria(listadetarefas *lt, char nome[30]){
     int prioridadeescolhida;
     char categoriaescolhida[100];
 
@@ -299,7 +299,12 @@ int salvarlista(listadetarefas *lt, char nome[]){ //Função para salvar a lista
         printf("Erro ao abrir o arquivo.\n"); //Caso o arquivo não exista, esta mensagem aparece no terminal alertando o usuário
         return 1;
     }
-    fwrite(lt, sizeof(listadetarefas), 1, f); //Este comando escreve no arquivo em formato binário as informações dadas pelo usuário
+    if(fwrite(lt, sizeof(listadetarefas), 1, f) != 1 ) //Este comando escreve no arquivo em formato binário as informações dadas pelo usuário
+    {
+        printf("Erro ao salvar\n");
+        fclose(f);
+        return 1;
+    }
     fclose(f); //Fecha o arquivo
     return 0;
 }
@@ -316,8 +321,9 @@ int carregarlista(listadetarefas *lt, char nome[]){ //Função para carregar a l
     return 0;
 }
 
+/*
 int ler_exportarprioridade(listadetarefas *lt, char nome[30]){
-    FILE *f = fopen(nome, "rb"); //abre o arquivo e lê ele em formato binário
+    FILE *f = fopen(nome, "r"); //abre o arquivo e lê ele em formato binário
     if (f == NULL) { //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
         printf("Arquivo nao encontrado.\n"); 
         return 1;
@@ -328,6 +334,7 @@ int ler_exportarprioridade(listadetarefas *lt, char nome[30]){
 
     printf("Tarefas com a prioridade escolhida foram exportadas com sucesso!");
 }
+*/
 
 //int ler_exportarcategoria(listadetarefas *lt, char nome[30]){
   //  FILE *f = fopen(nome, "rb"); //abre o arquivo e lê ele em formato binário
@@ -342,6 +349,3 @@ int ler_exportarprioridade(listadetarefas *lt, char nome[30]){
    // printf("Tarefas com a categoria escolhida foram exportadas com sucesso!");
 //}
 
-int ler_exportarprioridadeecategoria(listadetarefas *lt, char nome[30]){
-    
-}
