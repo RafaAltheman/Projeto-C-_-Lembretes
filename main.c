@@ -35,30 +35,30 @@ int main() {
         printf("Escolha uma opcao (1 a 12): ");
         scanf("%d", &opcao); //Usuário digita a opção dele e ela é salva na mamória.
 
-        // Dependendo da escolha do usuário, a função roda para realizar o cadastro, listagem ou deletar o lembrete
+        // Dependendo da escolha do usuário, a função roda para realizar a função que o cliente deseja realizar com seus lembretes.
         if (opcao==0){
         } else if (opcao==1){
-            criartarefa(&lt); //Na opção 1, a função criar tarefa é utilizada
+            criartarefa(&lt); //Na opção 1, a função criar tarefa é chamada
         } else if (opcao==2){
-            deletartarefa(&lt); //Na opção 2, a função deletar tarefa é utilizada
+            deletartarefa(&lt); //Na opção 2, a função deletar tarefa é chamada
         } else if (opcao==3){
-            listartarefa(lt); //Na opção 3, a função listar tarefa é utilizada
+            listartarefa(lt); //Na opção 3, a função listar tarefa é chamada
         } else if (opcao==4){
-            editartarefa(&lt);
+            editartarefa(&lt); //Na opção 4, a função editar tarefa é chamada
         } else if (opcao == 5){
-            filtrarprioridade(&lt);
+            filtrarprioridade(&lt); //Na opção 5, a função filtrar tarefa por prioridade é chamada
         } else if (opcao == 6){
-            filtrarestado(&lt);
+            filtrarestado(&lt); //Na opção 6, a função filtrar tarefa por estado é chamada
         } else if (opcao == 7){
-            filtrarcategoria(&lt);
+            filtrarcategoria(&lt); //Na opção 7, a função filtrar tarefa por categoria é chamada
         } else if (opcao == 8){
-            filtrarprioridadeecategoria(&lt);
+            filtrarprioridadeecategoria(&lt); //Na opção 8, a função filtrar por prioridade e categoria é chamada
         } else if (opcao == 9){
-            exportarprioridade(lt, "tarefasporprioridade.txt");
+            exportarprioridade(lt, "tarefasporprioridade.txt"); //Na opção 9, a função exportar por prioridade é chamada
         } else if (opcao == 10){
-            exportarcategoria(&lt, "tarefasporcategoria.txt");
+            exportarcategoria(&lt, "tarefasporcategoria.txt"); //Na opção 10, a função exportar categoria é chamada 
         } else if (opcao == 11){
-
+            exportarprioridadeecategoria(&lt, "tarefasporprioridadeecategoria.txt"); //Na opção 11, a função exportar por prioridade e categoria é chamada
         } else if (opcao == 12){ //Para o usuário salvar o arquivo, ele deve apertar a opção ("Sair"), sendo que quando acessar o programa novamente, todas as informações fornecidas antes de sair serão listadas
             salvarlista(&lt, "tarefas.bin");
             break;

@@ -61,27 +61,31 @@ int listartarefa(listadetarefas lt){ //Função para listar as tarefas previamen
     return 0;
 }
 
-int editartarefa(listadetarefas *lt){
+int editartarefa(listadetarefas *lt){ // Função para editar as tarefas ja existentes
+    // Declaração de variáveis
     int posicao;
     int campo;
+    // Pede para o usuário qual tarefa ele deseja editar e guarda na variável "posição"
     printf("Digite o número da Tarefa que deseja editar (de 1 a %d): ", lt->qtd);
     scanf("%d", &posicao);
-
+    // Confere se é uma tarefa existente
     if (posicao >=1 && posicao <= lt->qtd){
         int campo;
-
+    // Se a tarefa existir, o programa fornece um menu para o usuário escolher qual tópico da tarefa ele deseja modificar
         printf("1. Prioridade\n");
         printf("2. Categoria\n");
         printf("3. Descrição\n");
         printf("4. Estado\n");
 
+    // Pede para o usuário qual campo ele deseja modificar e guarda na variável "campo"
         printf("Digite o campo da tarefa que voce deseja modificar:");
         scanf("%d", &campo);
         clearbuffer();
 
+    // Se o usuário escolher a opção 1, ele modificará a prioridade
         if(campo == 1){
             printf("Nova Prioridade (0 a 10):\n");
-            scanf("%d", &lt->tarefas[posicao - 1].prioridade);
+            scanf("%d", &lt->tarefas[posicao - 1].prioridade); // O scanf substitui a antiga prioridade pela nova escolhida pelo usuário
             clearbuffer();
             printf("Tarefa editada!\n");
         } else if(campo == 2){
@@ -250,7 +254,7 @@ int exportarcategoria(listadetarefas *lt, char nome[30]){
     char categoriaselecionada[100];
 
     printf("Digite a categoria que você deseja exportar:\n");
-    scanf("%d", &categoriaselecionada);
+    scanf("% [^\n]", categoriaselecionada);
 
     FILE *f = fopen("tarefasporcategoria.txt", "w");
     if (f == NULL){  //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
@@ -281,7 +285,7 @@ int exportarprioridadeecategoria(listadetarefas *lt, char nome[30]){
       printf("Erro ao abrir o arquivo. \n"); 
       return 1;
    } for (int i = 0; i < lt -> qtd; i++){
-        if(lt->tarefas[i].categoria == categoriaescolhida){
+        if(lt->tarefas[i].prioridade == prioridadeescolhida && strcmp(categoriaescolhida, lt->tarefas[i].categoria) == 0){
             fprintf(f, "Prioridade: %d, Categoria: %s, Estado: %s, Descrição: %s\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
         }
    }
