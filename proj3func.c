@@ -254,17 +254,19 @@ int exportarcategoria(listadetarefas *lt, char nome[30]){
     char categoriaselecionada[100];
 
     printf("Digite a categoria que você deseja exportar:\n");
-    scanf("% [^\n]", categoriaselecionada);
+    scanf(" %99[^\n]", categoriaselecionada);
 
-    FILE *f = fopen("tarefasporcategoria.txt", "w");
+    FILE *f = fopen("tarefasporcategorias.txt", "w");
+    printf("%p ", f);
     if (f == NULL){  //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
       printf("Erro ao abrir o arquivo. \n"); 
       return 1;
    } for (int i = 0; i < lt -> qtd; i++){
-        if(lt->tarefas[i].categoria == categoriaselecionada){
+        if(strcmp(lt->tarefas[i].categoria ,categoriaselecionada)==0){
             fprintf(f, "Prioridade: %d, Categoria: %s, Estado: %s, Descrição: %s\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
         }
    }
+
     fclose(f);
     printf("Tarefas com a categoria selecionada foram exportadas\n");
 

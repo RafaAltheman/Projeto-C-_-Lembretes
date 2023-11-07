@@ -56,7 +56,7 @@ int main() {
         } else if (opcao == 9){
             exportarprioridade(lt, "tarefasporprioridade.txt"); //Na opção 9, a função exportar por prioridade é chamada
         } else if (opcao == 10){
-            exportarcategoria(&lt, "tarefasporcategoria.txt"); //Na opção 10, a função exportar categoria é chamada 
+            exportarcategoria(&lt, "tarefasporcategorias.txt"); //Na opção 10, a função exportar categoria é chamada 
         } else if (opcao == 11){
             exportarprioridadeecategoria(&lt, "tarefasporprioridadeecategoria.txt"); //Na opção 11, a função exportar por prioridade e categoria é chamada
         } else if (opcao == 12){ //Para o usuário salvar o arquivo, ele deve apertar a opção ("Sair"), sendo que quando acessar o programa novamente, todas as informações fornecidas antes de sair serão listadas
