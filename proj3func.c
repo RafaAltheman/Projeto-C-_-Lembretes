@@ -190,7 +190,6 @@ int filtrarcategoria(listadetarefas *lt){
             }
         }
     }  
-
         printf("Tarefas com categoria escolhida e ordenadas por prioridade:\n");
         for (int i = 0; i < tarefasprioridade; i++) {
             printf("Tarefa %d:\n", i + 1);
@@ -234,9 +233,9 @@ int exportarprioridade(listadetarefas lt, char nome[30]){
     int prioridadeescolhida;
     printf("Digite o número da prioridade que voce deseja exportar:\n");
     scanf("%d", &prioridadeescolhida);
-
+    if (prioridadeescolhida >=0 && prioridadeescolhida<=10){
     FILE *f = fopen("tarefasporprioridade.txt", "w");
-
+   
     if (f == NULL){  //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
       printf("Erro ao abrir o arquivo. \n"); 
       return 1;
@@ -248,6 +247,10 @@ int exportarprioridade(listadetarefas lt, char nome[30]){
    }
     fclose(f);
     printf("Tarefas com a prioridade selecionada foram exportadas\n");
+   } else {
+        printf("Prioridade não existente\n");
+   }
+    
 }
     
 int exportarcategoria(listadetarefas *lt, char nome[30]){
