@@ -255,16 +255,42 @@ int exportarprioridade(listadetarefas lt, char nome[30]){
     
 int exportarcategoria(listadetarefas *lt, char nome[30]){
     char categoriaselecionada[100];
+    int encontrado = 0;
+    tarefa tarefasprioritarias[100];
 
     printf("Digite a categoria que você deseja exportar:\n");
     scanf(" %99[^\n]", categoriaselecionada);
 
+    int tarefasprioridade = 0;
+
+    for (int i = 0; i < lt->qtd; i++) {
+        if (strcmp(categoriaselecionada, lt->tarefas[i].categoria) == 0) {
+            tarefasprioritarias[tarefasprioridade] = lt->tarefas[i];
+            tarefasprioridade++;
+            encontrado = 1;
+        }
+    }
+    if (!encontrado){
+        printf("Digite uma categoria válida\n");
+    } else {
+        for(int i = 0; i < tarefasprioridade; i++){
+            for(int y = i+1; y < tarefasprioridade; y++){
+                if(tarefasprioritarias[i].prioridade < tarefasprioritarias[y].prioridade){
+                    tarefa ordem = tarefasprioritarias[i]; 
+                    tarefasprioritarias[i] = tarefasprioritarias[y];
+                    tarefasprioritarias[y] = ordem;
+                }
+            }
+        }
+    }  
+
     FILE *f = fopen("tarefasporcategorias.txt", "w");
-    printf("%p ", f);
+
+   // printf("%p ", f);
     if (f == NULL){  //caso o arquivo f não abrir (não existir) aparece a seguinte mensagem
       printf("Erro ao abrir o arquivo. \n"); 
       return 1;
-   } for (int i = 0; i < lt -> qtd; i++){
+   } for (int i = 0; i < tarefasprioridade; i++){
         if(strcmp(lt->tarefas[i].categoria ,categoriaselecionada)==0){
             fprintf(f, "Prioridade: %d, Categoria: %s, Estado: %s, Descrição: %s\n", lt->tarefas[i].prioridade, lt->tarefas[i].categoria, lt->tarefas[i].estado, lt->tarefas[i].descricao);
         }
