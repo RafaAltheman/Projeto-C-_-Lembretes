@@ -1,5 +1,6 @@
 #include "proj3func.h"
 #include <stdio.h>
+#include <string.h>
 
 void clearbuffer(){ //função que limpa o buffer de entrada para receber novas informações do usuário
    int c; 
@@ -145,7 +146,7 @@ int filtrarestado(listadetarefas *lt){ // Função de filtrar estado
     scanf(" %[^\n]", estadoescolhido); // guarda nessa variável o estado escolhido pelo user.
 
     for(int i = 0; i < lt->qtd; i++){
-        if(strcmp(estadoescolhido, lt->tarefas[i].estado) == 0){ // compara o estado que a pessoa escolheu com o que esta na lista guardado.
+        if(strcmp(lt->tarefas[i].estado, estadoescolhido) == 0){ // compara o estado que a pessoa escolheu com o que esta na lista guardado.
             printf("Tarefas com o estado selecionado:\n");
             printf("Prioridade: %d\n", lt->tarefas[i].prioridade); //Imprime a prioridade, procurando a  informação a partir da posição da tarefa na lista.
             printf("Categoria: %s\n", lt->tarefas[i].categoria); //Imprime a categoria, procurando a  informação a partir da posição da tarefa na lista.
