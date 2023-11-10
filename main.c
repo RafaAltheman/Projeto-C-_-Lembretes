@@ -1,5 +1,6 @@
 // Rafaela Altheman de Campos (24.123.010-1)
 #include <stdio.h>
+#include <string.h>
 #include "proj3func.h"
 
 int main() {
